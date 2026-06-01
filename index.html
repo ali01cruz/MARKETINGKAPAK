@@ -1,141 +1,553 @@
-<!DOCTYPE html>
+html_content = """<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Edición de Video - Servicios</title>
-  <style>
-    body {
-      background: #0f0f0f;
-      color: #f0f0f0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 20px;
-    }
-    h1, h2 {
-      color: #00ffe7;
-      text-shadow: 0 0 5px #00ffe7;
-    }
-    .card {
-      background-color: #1a1a1a;
-      border: 1px solid #333;
-      border-radius: 10px;
-      padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 0 10px rgba(0, 255, 231, 0.1);
-    }
-    a {
-      color: #00ffe7;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    ul, ol {
-      padding-left: 20px;
-    }
-    iframe {
-      width: 100%;
-      height: 250px;
-      border: none;
-      border-radius: 10px;
-    }
-    .video-embed {
-      margin-top: 10px;
-      margin-bottom: 10px;
-    }
-    .tiktok-embed {
-      width: 100%;
-      min-height: 500px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios de Marketing Digital & Redes Sociales | Agencia de Autoridad</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- VARIABLES Y CONFIGURACIÓN BASE --- */
+        :root {
+            --bg-dark: #090d16;
+            --bg-card: #121824;
+            --bg-card-accent: #1a2335;
+            --primary: #38bdf8;
+            --primary-rgb: 56, 189, 248;
+            --accent: #00f5a0;
+            --whatsapp-color: #25d366;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --text-inverse: #090d16;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius: 16px;
+        }
 
-    /* Estilo responsivo */
-    @media (max-width: 768px) {
-      .container {
-        padding: 15px;
-      }
-      iframe {
-        height: 200px;
-      }
-      h1 {
-        font-size: 24px;
-      }
-      h2 {
-        font-size: 20px;
-      }
-    }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    @media (max-width: 480px) {
-      h1 {
-        font-size: 22px;
-      }
-      h2 {
-        font-size: 18px;
-      }
-      iframe {
-        height: 180px;
-      }
-    }
-  </style>
-  <script async src="https://www.tiktok.com/embed.js"></script>
+        html {
+            scroll-behavior: smooth;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+        }
+
+        body {
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* --- BOTONES --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 28px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transition);
+            width: 100%;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, #0284c7 100%);
+            color: var(--text-inverse);
+            box-shadow: 0 4px 20px rgba(54, 189, 248, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(54, 189, 248, 0.5);
+        }
+
+        .btn-whatsapp {
+            background-color: var(--whatsapp-color);
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-whatsapp:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(37, 211, 102, 0.5);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background-color: rgba(56, 189, 248, 0.05);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 120px 0 80px 0;
+            position: relative;
+            text-align: center;
+            background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.15) 0%, rgba(9, 13, 22, 0) 70%);
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            margin-bottom: 24px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+        }
+
+        .hero .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+
+        /* --- AUTORIDAD / BENEFICIOS --- */
+        .authority {
+            padding: 80px 0;
+            background-color: rgba(255, 255, 255, 0.02);
+            border-y: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .section-subtitle {
+            font-size: 16px;
+            color: var(--text-muted);
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 48px auto;
+        }
+
+        .grid-features {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        .feature-card {
+            background-color: var(--bg-card);
+            padding: 32px;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background-color: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            font-size: 15px;
+            color: var(--text-muted);
+        }
+
+        /* --- SERVICIOS / PRECIOS --- */
+        .services {
+            padding: 100px 0;
+        }
+
+        .grid-services {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            align-items: start;
+        }
+
+        .price-card {
+            background-color: var(--bg-card);
+            border-radius: var(--border-radius);
+            padding: 40px 32px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .price-card:hover {
+            border-color: rgba(56, 189, 248, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .price-card.featured {
+            background-color: var(--bg-card-accent);
+            border: 2px solid var(--primary);
+            box-shadow: 0 10px 40px rgba(56, 189, 248, 0.15);
+        }
+
+        .badge {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: var(--text-inverse);
+            padding: 4px 16px;
+            font-size: 12px;
+            font-weight: 800;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .service-type {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .price-card h3 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .price-box {
+            margin-bottom: 24px;
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+        }
+
+        .price {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .period {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .service-desc {
+            font-size: 15px;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 24px;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            flex-grow: 1;
+        }
+
+        .features-list li {
+            font-size: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .features-list li::before {
+            content: "✓";
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .price-card.featured .features-list li::before {
+            color: var(--accent);
+        }
+
+        /* --- CONTACTO / FOOTER --- */
+        .footer {
+            background-color: #05070f;
+            padding: 80px 0 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+        }
+
+        .footer h2 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .footer p {
+            color: var(--text-muted);
+            max-width: 500px;
+            margin: 0 auto 32px auto;
+        }
+
+        .contact-info {
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 14px;
+            color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        /* --- FLOATING WHATSAPP BUTTON --- */
+        .floating-wa {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--whatsapp-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            z-index: 100;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .floating-wa:hover {
+            transform: scale(1.1);
+        }
+
+        .floating-wa svg {
+            width: 32px;
+            height: 32px;
+            fill: #fff;
+        }
+
+        /* --- RESPONSIVE DESIGNS --- */
+        @media (min-width: 768px) {
+            .hero h1 { font-size: 56px; }
+            .hero .btn-group {
+                flex-direction: row;
+                max-width: none;
+                justify-content: center;
+            }
+            .hero .btn { width: auto; min-width: 200px; }
+            .grid-features { grid-template-columns: repeat(3, 1fr); }
+            .section-title { font-size: 40px; }
+        }
+
+        @media (min-width: 1024px) {
+            .grid-services {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Edición de Video - Servicios</h1>
-    <p class="mb-6">¿Querés que tus videos se vean <strong style="color:#ff00c8">PRO</strong>? ¡Yo te los edito!</p>
 
-    <div class="card">
-      <h2>Servicios y Precios</h2>
-      <ul>
-        <li><strong>Videos cortos (menos de 1 minuto):</strong> $1800</li>
-        <li><strong>Videos largos (hasta 15 minutos):</strong> $10.000</li>
-      </ul>
-    </div>
+    <section class="hero">
+        <div class="container">
+            <h1>Transformá tu Presencia Digital en <span>Autoridad y Ventas</span></h1>
+            <p>No se trata solo de subir videos; construimos marcas personales respetadas y altamente rentables con estrategias adaptadas al mercado actual.</p>
+            <div class="btn-group">
+                <a href="#servicios" class="btn btn-primary">Ver Soluciones</a>
+                <button onclick="sendWhatsApp('General')" class="btn btn-outline">Consultar Directo</button>
+            </div>
+        </div>
+    </section>
 
-    <div class="card">
-      <h2>¿Cómo trabajo?</h2>
-      <ol>
-        <li>Me enviás el material</li>
-        <li>Te paso una vista previa</li>
-        <li>Ajustamos lo necesario</li>
-        <li>Entrega final lista para publicar</li>
-      </ol>
-    </div>
+    <section class="authority">
+        <div class="container">
+            <h2 class="section-title">¿Por qué elegirnos?</h2>
+            <p class="section-subtitle">En un mundo digital lleno de ruido, la autenticidad y el diseño estratégico son la única forma de dominar tu sector.</p>
+            
+            <div class="grid-features">
+                <div class="feature-card">
+                    <div class="feature-icon">👤</div>
+                    <h3>Marcas Personales</h3>
+                    <p>Humanizamos tu negocio para generar un ecosistema de confianza real con tu audiencia ideal.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Estructura y Retención</h3>
+                    <p>Aplicamos ganchos y formatos probados para capturar la atención desde el primer segundo.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎬</div>
+                    <h3>Producción Premium</h3>
+                    <p>Formatos orgánicos avanzados, vlogs dinámicos y edición profesional de alto impacto visual.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <div class="card">
-      <h2>Medios de Pago</h2>
-      <ul>
-        <li>Transferencia bancaria (Argentina)</li>
-        <li>Mercado Pago</li>
-        <li>PIX (Brasil)</li>
-        <li>USDT (Criptomonedas)</li>
-      </ul>
-    </div>
+    <section class="services" id="servicios">
+        <div class="container">
+            <h2 class="section-title">Nuestras Soluciones</h2>
+            <p class="section-subtitle">Seleccioná el plan perfecto según la etapa actual de tu marca o proyecto de negocio.</p>
+            
+            <div class="grid-services">
+                
+                <div class="price-card featured">
+                    <div class="badge">Más Popular</div>
+                    <div class="service-type">Servicio 1</div>
+                    <h3>Manejo Integral de Redes Sociales</h3>
+                    <div class="price-box">
+                        <span class="price">$300.000</span>
+                        <span class="period">/ mes</span>
+                    </div>
+                    <p class="service-desc">El servicio premium definitivo para delegar toda tu producción y escalar tu autoridad.</p>
+                    <ul class="features-list">
+                        <li>Gestión y optimización de 3 redes sociales principales.</li>
+                        <li>Planificación y 1 publicación diaria estratégica.</li>
+                        <li>Creación de contenido enfocado en tu marca personal.</li>
+                        <li>4 jornadas de grabación mensuales (3 horas aprox. c/u).</li>
+                        <li>Edición avanzada y adaptación para múltiples formatos.</li>
+                    </ul>
+                    <button onclick="sendWhatsApp('Servicio 1: Manejo de Redes Sociales')" class="btn btn-primary">Adquirir Plan Completo</button>
+                </div>
 
-    <div class="card">
-      <h2>Contacto</h2>
-      <p>WhatsApp: <a href="https://wa.me/543884843354">+54 388 484-3354</a></p>
-    </div>
+                <div class="price-card">
+                    <div class="service-type">Servicio 2</div>
+                    <h3>Consultoría Estratégica 1-a-1</h3>
+                    <div class="price-box">
+                        <span class="price">$50.000</span>
+                        <span class="period">/ sesión</span>
+                    </div>
+                    <p class="service-desc">La hoja de ruta exacta si querés gestionar tu contenido de manera eficiente y correcta.</p>
+                    <ul class="features-list">
+                        <li>Consultoría intensiva y personalizada de hasta 3 horas.</li>
+                        <li>Auditoría completa de tus canales digitales actuales.</li>
+                        <li>Detección de errores y oportunidades de mejora reales.</li>
+                        <li>Estructura de contenidos para proyectos desde cero.</li>
+                        <li><strong>Bonus:</strong> Entrega de 5 ideas clave adaptadas a tu nicho.</li>
+                    </ul>
+                    <button onclick="sendWhatsApp('Servicio 2: Consultoría Estratégica')" class="btn btn-outline">Agendar Consultoría</button>
+                </div>
 
-    <div class="card">
-      <h2>Ejemplos de mi trabajo</h2>
-      <div class="video-embed">
-        <iframe src="https://www.youtube.com/embed/77YlhwPWO6o" title="Ejemplo YouTube" allowfullscreen></iframe>
-      </div>
-      <div class="video-embed">
-        <iframe src="https://www.youtube.com/embed/7bxhXCtnee4" title="Ejemplo YouTube" allowfullscreen></iframe>
-      </div>
-      <div class="video-embed">
-        <iframe src="https://www.youtube.com/embed/Xa2PEqBdfus" title="Ejemplo YouTube" allowfullscreen></iframe>
-      </div>
-    </div>
-  </div>
+                <div class="price-card">
+                    <div class="service-type">Servicio 3</div>
+                    <h3>Publicidad y Visibilidad</h3>
+                    <div class="price-box">
+                        <span class="price">$20.000</span>
+                        <span class="period">/ pauta</span>
+                    </div>
+                    <p class="service-desc">Aprovechá la fuerza de mi comunidad activa para potenciar de inmediato tu alcance comercial.</p>
+                    <ul class="features-list">
+                        <li>Promoción directa de tu negocio, producto o servicio.</li>
+                        <li>Alcance e impacto masivo en canales consolidados.</li>
+                        <li>Segmentación orgánica para atraer nuevos prospectos.</li>
+                        <li>Formato dinámico y altamente persuasivo.</li>
+                    </ul>
+                    <button onclick="sendWhatsApp('Servicio 3: Publicidad en Redes')" class="btn btn-outline">Anunciar mi Negocio</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <h2>¿Listo para liderar el mercado actual?</h2>
+            <p>Escribinos hoy, contanos sobre tu modelo de negocio y diseñemos juntos un plan de alto rendimiento digital.</p>
+            <div style="max-width: 320px; margin: 0 auto;">
+                <button onclick="sendWhatsApp('General')" class="btn btn-whatsapp">
+                    <svg viewBox="0 0 24 24" style="width:20px; height:20px; fill:currentColor;"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.4 0 11.973 0c3.184.001 6.177 1.24 8.43 3.496 2.254 2.256 3.491 5.253 3.491 8.434 0 6.651-5.34 11.999-11.914 11.999-2.005-.002-3.974-.509-5.719-1.474L0 24zm6.59-3.784c1.6.953 3.578 1.457 5.378 1.458 5.587 0 10.132-4.522 10.135-10.111.002-2.707-1.051-5.253-2.965-7.17C17.28 2.478 14.732 1.424 12.02 1.424 6.433 1.424 1.889 5.945 1.886 11.535c-.002 1.874.493 3.704 1.436 5.314l-.991 3.619 3.722-.974zM17.522 14.34c-.302-.15-1.786-.881-2.062-.982-.276-.1-.478-.15-.678.15-.199.299-.775.982-.95 1.183-.175.201-.35.226-.652.076-.302-.15-1.276-.47-2.43-1.499-.899-.801-1.505-1.792-1.681-2.091-.176-.302-.019-.465.131-.614.136-.134.302-.35.453-.525.151-.175.201-.299.302-.499.102-.201.05-.376-.025-.525-.075-.15-.678-1.635-.93-2.243-.244-.589-.493-.51-.678-.519-.174-.009-.375-.01-.576-.01-.201 0-.527.075-.802.376-.276.301-1.053 1.027-1.053 2.507s1.078 2.906 1.228 3.107c.151.201 2.122 3.241 5.14 4.543.717.31 1.277.495 1.714.634.721.23 1.377.198 1.896.121.579-.085 1.786-.731 2.038-1.44.252-.708.252-1.314.176-1.44-.076-.127-.277-.202-.579-.352z"/></svg>
+                    Contactar por WhatsApp
+                </button>
+            </div>
+            <div class="contact-info">
+                <span>📍 Jujuy, Argentina.</span>
+                <span>© 2026 Todos los derechos reservados.</span>
+            </div>
+        </div>
+    </footer>
+
+    <div class="floating-wa" onclick="sendWhatsApp('General')">
+        <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.4 0 11.973 0c3.184.001 6.177 1.24 8.43 3.496 2.254 2.256 3.491 5.253 3.491 8.434 0 6.651-5.34 11.999-11.914 11.999-2.005-.002-3.974-.509-5.719-1.474L0 24zm6.59-3.784c1.6.953 3.578 1.457 5.378 1.458 5.587 0 10.132-4.522 10.135-10.111.002-2.707-1.051-5.253-2.965-7.17C17.28 2.478 14.732 1.424 12.02 1.424 6.433 1.424 1.889 5.945 1.886 11.535c-.002 1.874.493 3.704 1.436 5.314l-.991 3.619 3.722-.974zM17.522 14.34c-.302-.15-1.786-.881-2.062-.982-.276-.1-.478-.15-.678.15-.199.299-.775.982-.95 1.183-.175.201-.35.226-.652.076-.302-.15-1.276-.47-2.43-1.499-.899-.801-1.505-1.792-1.681-2.091-.176-.302-.019-.465.131-.614.136-.134.302-.35.453-.525.151-.175.201-.299.302-.499.102-.201.05-.376-.025-.525-.075-.15-.678-1.635-.93-2.243-.244-.589-.493-.51-.678-.519-.174-.009-.375-.01-.576-.01-.201 0-.527.075-.802.376-.276.301-1.053 1.027-1.053 2.507s1.078 2.906 1.228 3.107c.151.201 2.122 3.241 5.14 4.543.717.31 1.277.495 1.714.634.721.23 1.377.198 1.896.121.579-.085 1.786-.731 2.038-1.44.252-.708.252-1.314.176-1.44-.076-.127-.277-.202-.579-.352z"/></svg>
+     </div>
+
+    <script>
+        function sendWhatsApp(serviceName) {
+            const phoneNumber = "5493884843354";
+            let baseText = "¡Hola! Estuve viendo tu página web y me interesa recibir más información.";
+            
+            if (serviceName !== 'General') {
+                baseText += ` Específicamente sobre el *${serviceName}*.`;
+            }
+            
+            const encodedText = encodeURIComponent(baseText);
+            const waUrl = `https://wa.me/${phoneNumber}?text=${encodedText}`;
+            
+            window.open(waUrl, '_blank');
+        }
+    </script>
 </body>
 </html>
+"""
+
+with open("index.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+print("File generated successfully.")
